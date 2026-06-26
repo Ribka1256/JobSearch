@@ -1,15 +1,48 @@
 import JobCards from "../Components/JobCards.jsx";
-function Home(){
+import '../css/Home.css'
+import { useState } from "react";
+function Home() {
 
-    const jobs = [
-        {id: 1, title: "Software Engineer", company: "TechCorp", location: "New York, NY", salary: "$100,000 - $120,000"},
-        {id: 2, title: "Data Analyst", company: "DataSolutions", location: "San Francisco, CA", salary: "$80,000 - $95,000"},
-        {id: 3, title: "Product Manager", company: "InnovateX", location: "Austin, TX", salary: "$110,000 - $130,000"},
-        {id: 4, title: "UX Designer", company: "DesignHub", location: "Seattle, WA", salary: "$90,000 - $105,000"},
-        {id: 5, title: "DevOps Engineer", company: "CloudWorks", location: "Boston, MA", salary: "$95,000 - $115,000"}
-    ]
-    return <div> 
-        {jobs.map((job) => <JobCards job={job} key= {job.id}/>)}
+    const [jobs, setJobs] = useState([])
+    const [searchQuery, setSearchQuery] = useState("")
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
+     if(!searchQuery.trim()) return
+     if(loading) return
+
+     setLoading(true)
+     try {
+      const searchResult = await  searchJobs(searchQuery)
+      setJobs(searchResult)
+      setError(null)
+
+     }catch(err){
+      console.log(err);
+        setError("Failed to load the movie");
+
+     }finally
+     {
+      setLoading(false)
+     }
+    setSearchQuery("");
+    }
+  return (
+    <div className="home">
+      <form  onSubmit={handleSubmit} className="search-form">
+        <input type="text" placeholder="search for jobs..." />
+        <button type="submit" className="search-button">
+          Search
+        </button>
+      </form>
+      {jobs.map(
+        (job) =>
+          job.title?.toLowerCase().startsWith(searchQuery.toLowerCase()) && (
+            (<JobCards job={job} key={job.id} />)
+          ),
+      )}
     </div>
+  );
 }
 export default Home;
