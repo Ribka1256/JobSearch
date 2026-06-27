@@ -3,7 +3,10 @@ function JobCard({job}){
 
     return <div className="movie-card">
         <div className="movie-poster">
-        <img src={job.thumbnail} alt={job.title} />
+       <img
+  src={job.thumbnail}
+  alt={job.title}
+/>
    </div>
    <div className="movie-overlay">
     <button className="favorite-btn">🤍</button>

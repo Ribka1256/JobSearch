@@ -1,18 +1,25 @@
+const BASE_URL = "http://localhost:5000/jobs";
 
-const api_key = "e81d10561e82cdc749724bfb76b6c0a21b580f34378883131c1fb7e8ff874d40"
-const base_url = "https://serpapi.com/search?engine=google_jobs"
+export const getJobs = async (query = "software engineer") => {
+  const response = await fetch(
+    `${BASE_URL}?q=${encodeURIComponent(query)}`
+  );
 
-const getJobs = async (query) =>{
-    const url = `${base_url}&q=${query}&api_key=${api_key}`
-    const response = await fetch(url)
-    const data = await response.json()
-    return data
-}
+  if (!response.ok) {
+    throw new Error("Failed to fetch jobs");
+  }
 
+  return await response.json();
+};
 
-const searchJobs = async (query) =>{
-    const url = `${base_url}&q=${query}&api_key=${api_key}`
-    const response = await fetch(url)
-    const data = await response.json()
-    return data
-}
+export const searchJobs = async (query) => {
+  const response = await fetch(
+    `${BASE_URL}?q=${encodeURIComponent(query)}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch jobs");
+  }
+
+  return await response.json();
+};

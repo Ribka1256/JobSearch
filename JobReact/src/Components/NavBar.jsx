@@ -9,7 +9,9 @@ function NavBar(){
         </div>
         <div className="navbar-links">
             <Link to="/" className='nav-link'>Home</Link>
-            <Link to="/favorites" className='nav-link'>Favorite</Link>
+            <Link to="/favorite" className='nav-link'>Favorite</Link>
+            <Link to="/upload" className='nav-link'>Resume Upload</Link>
+            <Link to="/detail" className='nav-link'>Job Details</Link>
 
         </div>
     </nav>
