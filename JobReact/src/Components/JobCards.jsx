@@ -1,22 +1,39 @@
-import '../css/MovieCard.css'
-function JobCard({job}){
+import '../css/JobCard.css'
+import { useNavigate } from 'react-router-dom'
+import '../css/JobCard.css'
 
-    return <div className="movie-card">
-        <div className="movie-poster">
-     <img
-  src={job.thumbnail || "/job-placeholder.png"}
-  alt={job.title}
-/>
-   </div>
-   <div className="movie-overlay">
-    <button className="favorite-btn">🤍</button>
-   </div>
+function JobCard({ job }) {
+  const navigate = useNavigate()
 
-     <div className="movie-info">
+  const onFavoriteClick = (e) =>{
+    e.preventDefault()
+
+    if(favorite){
+
+    }
+  }
+  return (
+    <div className="job-card">
+      <div className="job-poster">
+        {job.image ? <img src={job.image} alt={job.title} /> : null}
+       <button
+            className={`favorite-btn ${favorite ? "active" : ""}`}
+            onClick={onFavoriteClick}
+          >
+            {favorite ? "❤️" : "🤍"}
+          </button>
+      </div>
+
+      <div className="job-info">
         <h3>{job.title}</h3>
-         <p>{job.company_name}</p>
-          <p>{job.location}</p>
+        <p className="company">{job.company_name}</p>
+        <p className="location">📍 {job.location}</p>
+        <p className="salary">💲 {job.salary_range}</p>
+        <button className="apply-btn" onClick={() => navigate('/apply')}>
+          Apply Now
+        </button>
+      </div>
     </div>
- </div>
+  )
 }
-export default JobCard;
+export default JobCard

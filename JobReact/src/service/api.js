@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:5000/jobs";
 
-export const getJobs = async (query = "software engineer") => {
+export const getJobs = async (query) => {
   const response = await fetch(
     `${BASE_URL}?q=${encodeURIComponent(query)}`
   );

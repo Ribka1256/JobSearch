@@ -1,20 +1,26 @@
-import {Link} from "react-router-dom"
-import "../css/Navbar.css"
-function NavBar(){
+// Navbar.jsx
+import { Link } from "react-router-dom";
+import '../css/Navbar.css';
 
-     return <nav className="navbar">
-        <div className="navbar-brand">
-            <Link to="/">JobSearch</Link>
+function Navbar() {
+  return (
+    <div className="navbar-wrapper">
+      <nav className="navbar">
+        <Link to="/" className="navbar-brand">
+          <span className="brand-icon">🏢</span>
+          JobSearch
+        </Link>
 
-        </div>
         <div className="navbar-links">
-            <Link to="/" className='nav-link'>Home</Link>
-            <Link to="/favorite" className='nav-link'>Favorite</Link>
-            <Link to="/upload" className='nav-link'>Resume Upload</Link>
-            <Link to="/detail" className='nav-link'>Job Details</Link>
-
+          <Link to="/" className="nav-link active">Home</Link>
+          <Link to="/favorite" className="nav-link">Favorite</Link>
+          <Link to="/apply" className="nav-link">Apply</Link>
+          <Link to="/detail" className="nav-link">Job Details</Link>
         </div>
-    </nav>
-}
 
-export default NavBar
+        <button className="get-started-btn">Get Started!</button>
+      </nav>
+    </div>
+  );
+}
+export default Navbar;
