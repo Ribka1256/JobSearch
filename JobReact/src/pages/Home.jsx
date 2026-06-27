@@ -54,12 +54,14 @@ console.log(err);
           Search
         </button>
       </form>
-      {jobs.map(
-        (job) =>
-          job.title?.toLowerCase().startsWith(searchQuery.toLowerCase()) && (
-            (<JobCards job={job} key={job.id} />)
-          ),
-      )}
+      <div className="movies-grid">
+     {jobs.map((job) => (
+  <JobCards
+    key={job.share_link}
+    job={job}
+  />
+))}
+</div>
     </div>
   );
 }

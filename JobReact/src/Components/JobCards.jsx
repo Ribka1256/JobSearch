@@ -3,8 +3,8 @@ function JobCard({job}){
 
     return <div className="movie-card">
         <div className="movie-poster">
-       <img
-  src={job.thumbnail}
+     <img
+  src={job.thumbnail || "/job-placeholder.png"}
   alt={job.title}
 />
    </div>
@@ -14,8 +14,8 @@ function JobCard({job}){
 
      <div className="movie-info">
         <h3>{job.title}</h3>
-         <p>{job.company}</p>
-          <p>{job.salary}</p>
+         <p>{job.company_name}</p>
+          <p>{job.location}</p>
     </div>
  </div>
 }

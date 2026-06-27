@@ -19,9 +19,9 @@ app.get("/jobs", async (req, res) => {
     const data = await response.json();
 
     res.json(data.jobs_results || []);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to fetch jobs" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch jobs" });
   }
 });
 
