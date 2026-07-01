@@ -101,13 +101,14 @@
 .filter-sidebar {
   width: 250px;
   flex-shrink: 0;
+  border: 2px solid 
 }
 
 .filter-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  padding: 20px;
 }
 
 .filter-header h4 {
@@ -116,12 +117,15 @@
 
 .reset {
   color: #60ee84;
-  font-size: 0.9rem;
+  font-size: 1rem;
   cursor: pointer;
+  font-weight: 800;
+  padding: 30px;
 }
 
 .filter-group {
   margin-bottom: 1.5rem;
+  padding:20px;
 }
 
 .filter-group h5 {
@@ -212,7 +216,7 @@
   }
 }
 
-@media (max-width: 639px) {
+@media (max-width: 639px) {b
   .hero {
     padding: 2rem 1rem 1.5rem;
   }

@@ -127,3 +127,67 @@ textarea {
   border-radius: 6px;
   font-size: 1rem;
 }
+.apply-success {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  color: white;
+  padding: 3rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+}
+
+.apply-success h2 {
+  font-size: 1.8rem;
+  color: #60ee84;
+}
+
+.apply-success p {
+  color: #ccc;
+}
+
+.apply-success button {
+  margin-top: 1rem;
+  background: #60ee84;
+  color: #111;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+@media (max-width: 900px) {
+  .apply-page {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .filter-sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+}

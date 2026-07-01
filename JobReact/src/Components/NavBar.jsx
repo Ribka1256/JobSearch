@@ -15,10 +15,9 @@ function Navbar() {
           <Link to="/" className="nav-link active">Home</Link>
           <Link to="/favorite" className="nav-link">Favorite</Link>
           <Link to="/apply" className="nav-link">Apply</Link>
-          <Link to="/detail" className="nav-link">Job Details</Link>
         </div>
 
-        <button className="get-started-btn">Get Started!</button>
+    
       </nav>
     </div>
   );

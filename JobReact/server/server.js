@@ -8,12 +8,18 @@ const app = express();
 
 app.use(cors());
 
-const fetchJobs = async (query) => {
-  const response = await fetch(
-    `https://serpapi.com/search?engine=google_jobs&q=${encodeURIComponent(query)}&api_key=${process.env.SERP_API_KEY}`
-  );
+const fetchJobs = async (query, location = "United States") => {
+  const url = `https://serpapi.com/search?engine=google_jobs&q=${encodeURIComponent(query)}&location=${encodeURIComponent(location)}&api_key=${process.env.SERP_API_KEY}`;
 
+  const response = await fetch(url);
   const data = await response.json();
+
+  if (data.error) {
+    console.error("SerpApi error:", data.error);
+  } else {
+    console.log(`Query "${query}" returned ${data.jobs_results?.length || 0} jobs`);
+  }
+
   return data.jobs_results || [];
 };
 
@@ -65,4 +71,20 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+
+app.use(express.json()); // add this near the top with your other middleware
+
+app.post("/apply", async (req, res) => {
+  try {
+    const application = req.body;
+    console.log("New application received:", application);
+    // Later you can save to a DB here e.g.:
+    // await db.collection("applications").insertOne(application)
+    res.json({ success: true, message: "Application received" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Failed to save application" });
+  }
 });

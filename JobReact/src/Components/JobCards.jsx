@@ -1,39 +1,58 @@
-import '../css/JobCard.css'
-import { useNavigate } from 'react-router-dom'
-import '../css/JobCard.css'
+// JobCard.jsx
+import { useNavigate } from 'react-router-dom';
+import { useJobContext } from '../Components/JobContext.jsx';
+import '../css/JobCard.css';
 
-function JobCard({ job }) {
-  const navigate = useNavigate()
+function JobCard({ job, onViewDetails }) {
+  const navigate = useNavigate();
+  const { addFavorite, removeFromFavorite, isFavorite, getJobKey } = useJobContext();
 
-  const onFavoriteClick = (e) =>{
-    e.preventDefault()
+  const jobKey = getJobKey(job);
+  const favorited = isFavorite(jobKey);
 
-    if(favorite){
+  const toggleFavorite = (e) => {
+    e.stopPropagation();
+    favorited ? removeFromFavorite(jobKey) : addFavorite(job);
+  };
 
-    }
-  }
   return (
     <div className="job-card">
       <div className="job-poster">
-        {job.image ? <img src={job.image} alt={job.title} /> : null}
-       <button
-            className={`favorite-btn ${favorite ? "active" : ""}`}
-            onClick={onFavoriteClick}
-          >
-            {favorite ? "❤️" : "🤍"}
-          </button>
+        {job.image ? <img src={job.image} alt={job.title} /> : (
+          <div className="poster-placeholder">{job.company_name?.[0] || "J"}</div>
+        )}
+        <button
+          className={`favorite-btn ${favorited ? "active" : ""}`}
+          onClick={toggleFavorite}
+        >
+          {favorited ? "❤️" : "🤍"}
+        </button>
       </div>
 
       <div className="job-info">
         <h3>{job.title}</h3>
         <p className="company">{job.company_name}</p>
-        <p className="location">📍 {job.location}</p>
-        <p className="salary">💲 {job.salary_range}</p>
-        <button className="apply-btn" onClick={() => navigate('/apply')}>
+
+        <div className="job-meta">
+          <span className="location">📍 {job.location}</span>
+          {job.salary_range && <span className="salary">💲 {job.salary_range}</span>}
+        </div>
+
+        <button
+          className="detail-link"
+          onClick={() => onViewDetails(job)}
+        >
+          Job Description →
+        </button>
+
+        <button
+          className="apply-btn"
+          onClick={() => navigate('/apply', { state: { job } })}
+        >
           Apply Now
         </button>
       </div>
     </div>
-  )
+  );
 }
-export default JobCard
+export default JobCard;
